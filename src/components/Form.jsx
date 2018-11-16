@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from "react-redux"
+import {createTodo} from "../actions/todoAction"
 
 
 class  Form extends Component {
@@ -15,14 +17,22 @@ class  Form extends Component {
         })     
     }
 
+    handleSubmit = () => {
+        this.props.createTodo({
+            description: this.state.description,
+            done: false
+        })
+    }
     render() { 
         return ( 
             <div>
                 <input type="text"name="description" value={this.state.description} onChange={this.handleOnChange}/>
-                <button>Submit</button>
+                <button onClick={this.handleSubmit}>Submit</button>
             </div>
          );
     }
 }
+
+export default connect(null, {createTodo})(Form)
  
-export default Form;
+// export default Form;
